@@ -29,19 +29,23 @@ public class MainActivity extends AppCompatActivity {
             "B"
     };
 
-    // store
+    // store views that are frequently accessed in code
+    // dropdowns
     Spinner firstBar;
     Spinner secondBar;
     Spinner multiplier;
     Spinner tolerance;
 
+    // vertical rectangles in the resistor model
     View br1;
     View br2;
     View mult;
     View tol;
 
+    // where results are displayed
     TextView res;
 
+    // store current value of user's choices
     int valueBand1 = 0;
     int valueBand2 = 0;
     double valueMultiplier = 1;
@@ -57,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // header
         getSupportActionBar().setTitle(R.string.header);
 
+        // get aforementioned views
         firstBar = (Spinner) findViewById(R.id.first_bar);
         secondBar = (Spinner) findViewById(R.id.second_bar);
         multiplier = (Spinner) findViewById(R.id.multiplier_spin);
@@ -71,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
         res = (TextView)findViewById(R.id.results);
 
+        // set up items used across dropdowns; different adapter for different sets of items
+        // as not all colours can be used for bands/multiplier/tolerance
         // https://developer.android.com/develop/ui/views/components/spinner#java
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
@@ -96,15 +104,22 @@ public class MainActivity extends AppCompatActivity {
 
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        // bind item lists to the spinners
         firstBar.setAdapter(adapter);
         secondBar.setAdapter(adapter);
         multiplier.setAdapter(adapter2);
         tolerance.setAdapter(adapter3);
 
+        // set up listeners for each spinner
+        // onNothingSelected doesn't do anything but it's mandatory to have
+        // when the user selects an item, get its text, change the resistor color and get appropriate values
+        // for calculations
         firstBar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String text = firstBar.getSelectedItem().toString();
+                // workaround to get background colours to work for spinners; setting background otherwise
+                // in the xml causes the arrow to disappear for some reason
                 firstBar.getChildAt(0).setBackgroundColor(getResources().getColor(R.color.light_gray));
                 changeResistorColor(text, br1);
             }
@@ -158,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // update the resistor graphic AND current values for calculation according to
+    // the user's choice
     private void changeResistorColor(String choice, View view) {
         switch(choice) {
             case "Black":
@@ -295,6 +312,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // when clear button pressed, return spinners to default and delete the results text
     public void clear(View view) {
         firstBar.setSelection(0);
         secondBar.setSelection(0);
@@ -303,19 +321,30 @@ public class MainActivity extends AppCompatActivity {
         res.setText("");
     }
 
+    // use formula from the lab sheet to get resistance values
     private double calcResistance(int band1, int band2, double multiplier) {
-        return (band1 + (band2 * 10)) * multiplier;
+        return ((band1 * 10) + band2) * multiplier;
     }
 
+    // create displays with abbreviated numbers, e.g. 2200 -> 2.2K
     private String compressNumber(double number) {
+        // don't do anything if number below the first threshold; display with 2
+        // decimals since lowest result besides 0 is 0.11
         if(number < 1000) {
             return String.format("%.2f", number);
         }
 
+        // get index of the abbreviation to use from the above list
+        // the way this works is that it gets the power of ten of the number given, divided by 3
+        // as there is a new abbreviation bracket every 1000n, then -1 to account for a 0-based index
         int index = Math.min((((int)Math.log10(number)) / 3) - 1, ABBREVIATION_BASES.length - 1);
+
+        // display with 1 decimal if abbreviated
         return String.format("%.1f", number / ABBREVIATION_BASES[index]) + ABBREVIATIONS[index];
     }
 
+    // when calculate button pressed, display above calculation (using stored variables) with
+    // appropriate symbols and a tolerance
     public void calculate(View view) {
         res.setText(compressNumber(calcResistance(valueBand1, valueBand2, valueMultiplier))
         + " Ω ± " + valueTolerance + "%");
