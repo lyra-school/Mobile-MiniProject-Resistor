@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">MiniProject-Resistor</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="tv1">Bar 1</string>
+    <string name="tv2">Bar 2</string>
+    <string name="tv3">Multiplier</string>
+    <string name="tv4">Tolerance</string>
+    <string name="header">Resistor Calculator</string>
+    <string-array name="legal_bands">
+        <item>Black</item>
+        <item>Brown</item>
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Violet</item>
+        <item>Gray</item>
+        <item>White</item>
+    </string-array>
+    <string-array name="legal_multipliers">
+        <item>Black</item>
+        <item>Brown</item>
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Violet</item>
+        <item>Gray</item>
+        <item>White</item>
+        <item>Gold</item>
+        <item>Silver</item>
+    </string-array>
+    <string-array name="legal_tolerances">
+        <item>Brown</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Violet</item>
+        <item>Gray</item>
+        <item>Gold</item>
+        <item>Silver</item>
+        <item>None</item>
+    </string-array>
+</resources>

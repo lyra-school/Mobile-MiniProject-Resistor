@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/resistor_constraint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/resistor_bottom"
+        app:layout_constraintEnd_toStartOf="@id/resistor_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/resistor_left"
+        app:layout_constraintTop_toBottomOf="@id/resistor_top">
+
+        <View
+            android:id="@+id/resistor_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dim" />
+
+        <View
+            android:id="@+id/bar1"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bar2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/barset1_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/bar2"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bar3"
+            app:layout_constraintStart_toEndOf="@id/bar1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/bar3"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/barset1_right"
+            app:layout_constraintStart_toEndOf="@id/bar2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/bar4"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@color/brown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/barset2_right"
+            app:layout_constraintStart_toEndOf="@id/barset2_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/barset1_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/barset1_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/barset2_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/barset2_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/resistor_right"
+        app:layout_constraintStart_toEndOf="@id/resistor_left"
+        app:layout_constraintTop_toBottomOf="@id/resistor_constraint"
+        app:layout_constraintVertical_bias="0.07999998" />
+
+    <Button
+        android:id="@+id/calculateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/calculate"
+        android:onClick="calculate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clearBtn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/resistor_left"
+        app:layout_constraintTop_toBottomOf="@id/resistor_constraint"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/clear"
+        android:onClick="clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/resistor_right"
+        app:layout_constraintStart_toEndOf="@id/calculateBtn"
+        app:layout_constraintTop_toBottomOf="@id/resistor_constraint"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Spinner
+        android:id="@+id/first_bar"
+        android:layout_width="141dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@id/spinners_split"
+        app:layout_constraintEnd_toStartOf="@id/second_bar"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/resistor_left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.662" />
+
+    <Spinner
+        android:id="@+id/second_bar"
+        android:layout_width="141dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@id/spinners_split"
+        app:layout_constraintEnd_toStartOf="@id/resistor_right"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/first_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.662" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv1"
+        app:layout_constraintBottom_toTopOf="@id/first_bar"
+        app:layout_constraintStart_toStartOf="@id/first_bar" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv2"
+        app:layout_constraintBottom_toTopOf="@id/second_bar"
+        app:layout_constraintStart_toStartOf="@id/second_bar"/>
+
+    <Spinner
+        android:id="@+id/multiplier_spin"
+        android:layout_width="141dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@id/resistor_constraint"
+        app:layout_constraintEnd_toStartOf="@id/tolerance_spin"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@id/resistor_left"
+        app:layout_constraintTop_toTopOf="@id/spinners_split"
+        app:layout_constraintVertical_bias="0.662" />
+
+    <Spinner
+        android:id="@+id/tolerance_spin"
+        android:layout_width="141dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@id/resistor_constraint"
+        app:layout_constraintEnd_toStartOf="@id/resistor_right"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/multiplier_spin"
+        app:layout_constraintTop_toTopOf="@id/spinners_split"
+        app:layout_constraintVertical_bias="0.662" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv3"
+        app:layout_constraintBottom_toTopOf="@id/multiplier_spin"
+        app:layout_constraintStart_toStartOf="@id/multiplier_spin" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv4"
+        app:layout_constraintBottom_toTopOf="@id/tolerance_spin"
+        app:layout_constraintStart_toStartOf="@id/tolerance_spin"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/resistor_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/resistor_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/resistor_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/resistor_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/spinners_split"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.175" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
